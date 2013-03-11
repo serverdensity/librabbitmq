@@ -2,6 +2,7 @@ import os
 import platform
 import sys
 from setuptools import setup, find_packages
+from setuptools.command.install import install as _install
 
 # --with-librabbitmq=<dir>: path to librabbitmq package if needed
 
@@ -191,7 +192,12 @@ elif find_make():
     else:
         goahead = True
         ext_modules = [librabbitmq_ext]
-        cmdclass = {'build': build}
+
+        def install_and_build():
+            build()
+            _install()
+
+        cmdclass = {'build': build, 'install': install_and_build}
         packages = find_packages(exclude=['ez_setup', 'tests', 'tests.*'])
 
 if not goahead:
