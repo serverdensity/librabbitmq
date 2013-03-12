@@ -50,10 +50,10 @@ def create_builder():
     from distutils.command.build import build as _build
     cmd = None
     # incdirs and libdirs get these
-    pkgdirs = []
+    pkgdirs = ['./rabbitmq-c/', './rabbitmq-c/librabbitmq']
     libs = []
     defs = []
-    incdirs = []
+    incdirs = ['./rabbitmq-c/', './rabbitmq-c/librabbitmq']
     libdirs = ['./rabbitmq-c/', './rabbitmq-c/librabbitmq']
 
     def append_env(L, e):
@@ -61,7 +61,7 @@ def create_builder():
         if v and os.path.exists(v):
             L.append(v)
 
-    append_env(pkgdirs, 'LIBRABBITMQ')
+    #append_env(pkgdirs, 'LIBRABBITMQ')
 
     # Hack up sys.argv, yay
     unprocessed = []
