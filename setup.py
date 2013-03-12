@@ -50,11 +50,11 @@ def create_builder():
     from distutils.command.build import build as _build
     cmd = None
     # incdirs and libdirs get these
-    pkgdirs = ['./rabbitmq-c/', './rabbitmq-c/librabbitmq']
+    pkgdirs = []
     libs = []
     defs = []
     incdirs = []
-    libdirs = []
+    libdirs = ['./rabbitmq-c/', './rabbitmq-c/librabbitmq']
 
     def append_env(L, e):
         v = os.environ.get(e)
