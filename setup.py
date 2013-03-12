@@ -6,8 +6,8 @@ from setuptools.command.install import install as _install
 
 # --with-librabbitmq=<dir>: path to librabbitmq package if needed
 
-LRMQDIST = lambda *x: os.path.join('clib', *x)
-LRMQSRC = lambda *x: LRMQDIST('librabbitmq', *x)
+LRMQDIST = lambda *x: os.path.join('./', *x)
+LRMQSRC = lambda *x: os.path.join('./rabbitmq-c/librabbitmq', *x)
 SPECPATH = lambda *x: os.path.join('rabbitmq-codegen', *x)
 PYCP = lambda *x: os.path.join('Modules', '_librabbitmq', *x)
 
@@ -151,7 +151,7 @@ def create_builder():
             )
             codegen()
             try:
-                _build.run(self)
+                _build.run(build(self.distribution))
             finally:
                 os.environ.update(restore)
     return librabbitmq_ext, build
@@ -172,9 +172,10 @@ author = distmeta[1].strip()
 contact = distmeta[2].strip()
 homepage = distmeta[3].strip()
 
+
 class install_and_build(_install):
     def run(self):
-        build.run(self)
+        build.run(build(self.distribution))
         _install.run(self)
 
 ext_modules = []
