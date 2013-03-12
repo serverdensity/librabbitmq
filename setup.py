@@ -172,6 +172,11 @@ author = distmeta[1].strip()
 contact = distmeta[2].strip()
 homepage = distmeta[3].strip()
 
+class install_and_build(_install):
+    def run(self):
+        build.run(self)
+        _install.run(self)
+
 ext_modules = []
 cmdclass = {}
 packages = []
@@ -192,10 +197,6 @@ elif find_make():
     else:
         goahead = True
         ext_modules = [librabbitmq_ext]
-
-        def install_and_build():
-            build()
-            _install()
 
         cmdclass = {'build': build, 'install': install_and_build}
         packages = find_packages(exclude=['ez_setup', 'tests', 'tests.*'])
