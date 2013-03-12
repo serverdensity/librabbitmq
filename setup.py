@@ -49,7 +49,8 @@ def create_builder():
     from setuptools import Extension
     from distutils.command.build import build as _build
     cmd = None
-    pkgdirs = []  # incdirs and libdirs get these
+    # incdirs and libdirs get these
+    pkgdirs = ['./rabbitmq-c/', './rabbitmq-c/librabbitmq']
     libs = []
     defs = []
     incdirs = []
